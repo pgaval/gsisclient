@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.prime.com.tr/ui">
+    <h:head>
+        <title>Java Client για το web service Μη Φυσικών Προσώπων</title>
+    </h:head>
+    <h:body>
+        <p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>  
+
+        <p:dialog modal="true" widgetVar="statusDialog" header="Status"   
+                  draggable="false" closable="false">  
+            <h:panelGrid columns="1" cellpadding="5">
+
+                <h:outputText value="Παρακαλώ Περιμένετε... Γίνεται επικοινωνία με το WS της ΓΓΠΣ" />  
+                <h:graphicImage value="ajax-loader.gif" />
+            </h:panelGrid>
+        </p:dialog>
+        <p:growl id="growl" sticky="false" life="60"/>
+        <h:form id="searchForm">
+            <p:panel header="Αναζήτηση ΑΦΜ Μη Φυσικών Προσώπων">  
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputText value="ΑΦΜ:"/>
+                    <p:inputText id="afm" maxlength="9" value="#{showInfoBean.afm}"/>
+                        
+                    <p:commandButton value="Εκκαθάριση" type="reset" />  
+                    <p:commandButton value="Αναζήτηση" action="#{showInfoBean.getData()}" update="infogrid,growl,messages"/>  
+                </h:panelGrid>
+            </p:panel>
+            <p:separator/>
+
+            <p:panel header="Αποτελέσματα Αναζήτησης" >  
+                <h:panelGrid columns="2" cellpadding="5" id="infogrid">
+                    <h:outputText value="Τίτλος Επιχείρισης: " />  
+                    <h:outputText value="#{showInfoBean.info.onomasia}" />  
+
+                    <h:outputText value="Εμπορική Ονομασία: " />  
+                    <h:outputText value="#{showInfoBean.info.commerTitle}" />  
+
+                    <h:outputText value="Δραστηριότητα: " />  
+                    <h:outputText value="#{showInfoBean.info.actLongDescr}"/>  
+
+                    <h:outputText value="ΔΟΥ: " />  
+                    <h:outputText value="#{showInfoBean.info.doyDescr}(#{showInfoBean.info.doy})" />  
+
+                    <h:outputText value="Ταχ. Διεύθυνση: " />  
+                    <h:outputText value="#{showInfoBean.info.postalAddress} #{showInfoBean.info.postalAddressNo} ΤΚ: #{showInfoBean.info.postalZipCode}, #{showInfoBean.info.parDescription}" />  
+
+                    <h:outputText value="Στοιχεία Επικοινωνίας: " />  
+                    <h:outputText value="Τηλ: #{showInfoBean.info.firmPhone} , FAX: #{showInfoBean.info.firmFax}" /> 
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
+
