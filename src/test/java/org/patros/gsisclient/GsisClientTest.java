@@ -2,18 +2,24 @@
 package org.patros.gsisclient;
 
 import gr.gsis.rgwsbasstoixn.rgwsbasstoixn_wsdl.types.RgWsBasStoixNRtUser;
-import static org.junit.Assert.assertEquals;
+import junit.framework.Assert;
 import org.junit.Test;
 
 
 public class GsisClientTest {
   
     @Test
-    public void testGetData() {
-        System.out.println("getData");
-        String afm = "0944222821";
+    public void getDataShouldReturnValidData() {
+        String afm = "094422282";
         GsisClient instance = new GsisClient();
         RgWsBasStoixNRtUser basStoixNRtUser = instance.getData(afm);
-        assertEquals(afm, basStoixNRtUser.getAfm().trim()); 
+        Assert.assertNotNull(basStoixNRtUser.getDoy()); 
+    }
+    @Test
+    public void getDataShouldReturnNoData() {
+        String afm = "000000000";
+        GsisClient instance = new GsisClient();
+        RgWsBasStoixNRtUser basStoixNRtUser = instance.getData(afm);
+        Assert.assertNull(basStoixNRtUser.getDoy()); 
     }
 }
