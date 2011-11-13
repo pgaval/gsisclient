@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.prime.com.tr/ui">
     <h:head>
         <title>Java Client για το web service Μη Φυσικών Προσώπων</title>
@@ -17,12 +18,14 @@
                 <h:graphicImage value="ajax-loader.gif" />
             </h:panelGrid>
         </p:dialog>
-        <p:growl id="growl" sticky="false" life="60"/>
+        <p:growl id="growl" sticky="false"/>
         <h:form id="searchForm">
             <p:panel header="Αναζήτηση ΑΦΜ Μη Φυσικών Προσώπων">  
                 <h:panelGrid columns="2" cellpadding="5">
                     <h:outputText value="ΑΦΜ:"/>
-                    <p:inputText id="afm" maxlength="9" value="#{showInfoBean.afm}"/>
+                    <p:inputText id="afm" maxlength="9" value="#{showInfoBean.afm}">
+                        <f:validator validatorId="AfmValidator"/>
+                    </p:inputText>
                         
                     <p:commandButton value="Εκκαθάριση" type="reset" />  
                     <p:commandButton value="Αναζήτηση" action="#{showInfoBean.getData()}" update="infogrid,growl,messages"/>  
@@ -30,7 +33,7 @@
             </p:panel>
             <p:separator/>
 
-            <p:panel header="Αποτελέσματα Αναζήτησης" >  
+            <p:panel header="Αποτελέσματα Αναζήτησης">  
                 <h:panelGrid columns="2" cellpadding="5" id="infogrid">
                     <h:outputText value="Τίτλος Επιχείρισης: " />  
                     <h:outputText value="#{showInfoBean.info.onomasia}" />  

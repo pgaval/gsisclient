@@ -13,7 +13,7 @@ public class ShowInfoBean {
 
     private String afm;
     private RgWsBasStoixNRtUser info;
-
+    private boolean validData = false;
     public RgWsBasStoixNRtUser getInfo() {
         return info;
     }
@@ -38,14 +38,21 @@ public class ShowInfoBean {
                     new FacesMessage(FacesMessage.SEVERITY_WARN, 
                     "Δε βρέθηκαν στοιχεία για το ΑΦΜ:" +afm, 
                     "Δε βρέθηκαν στοιχεία για το ΑΦΜ:" +afm));
+            validData = false;
             
         }else {
             FacesContext.getCurrentInstance().addMessage(null, 
                     new FacesMessage(FacesMessage.SEVERITY_INFO, 
                     "Η ανάκτηση των στοιχείων ολοκληρώθηκε με επιτυχία", 
                     "Η ανάκτηση των στοιχείων ολοκληρώθηκε με επιτυχία"));
+            validData = true;
         }
         
+    }
+
+    public boolean isValidData() {
+        System.out.println ( "validData = " + validData);
+        return validData;
     }
     
 }

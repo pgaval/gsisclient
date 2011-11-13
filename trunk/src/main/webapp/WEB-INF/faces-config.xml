@@ -6,9 +6,8 @@
         http://java.sun.com/xml/ns/javaee
         http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
 
-   <!-- This descriptor activates the JSF 2.0 Servlet -->
-
-   <!-- Write your navigation rules here. You are encouraged to use CDI for 
-      creating @Named managed beans. -->
-
+    <validator>
+        <validator-id>AfmValidator</validator-id>	
+        <validator-class>org.patros.gsisclient.AfmValidator</validator-class>
+    </validator>
 </faces-config>
